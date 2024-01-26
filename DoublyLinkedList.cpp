@@ -15,7 +15,7 @@ class Node {
         }
 }; 
 
-class LinkedList {
+class LinkedList { 
     public: 
         int count; 
         Node* head;
