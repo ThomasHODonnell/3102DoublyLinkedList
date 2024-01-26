@@ -9,9 +9,9 @@ class Node {
         Node* next;
         Node* prev; 
 
-        Node (int key) {
-            this->key = key; 
-            this->next = this->prev = nullptr; 
+        Node () {
+            key = 0; 
+            next = prev = nullptr; 
         }
 }; 
 
@@ -27,7 +27,8 @@ class LinkedList {
         }
 
         void insertF (int key) {
-            Node* newNode = new Node(key); 
+            Node* newNode = new Node();
+            newNode -> key = key;  
             if (count == 0) {
                 head = tail = newNode; 
                 newNode -> next = nullptr; 
@@ -44,14 +45,18 @@ class LinkedList {
         }
 
         void insertL (int key) {
-            Node* newNode = new Node(key); 
-            if (head = nullptr) head = tail = newNode; 
+            Node* newNode = new Node();
+            Node* current = tail; 
+            newNode -> key = key; 
+            if (count == 0) {
+                head = tail = newNode; 
+                newNode -> next = nullptr; 
+                newNode -> prev = nullptr; 
+            }
             else {
-                Node* current = head; 
-                while (current -> next != nullptr) current = current -> next; 
                 current -> next = newNode; 
                 newNode -> prev = current; 
-                newNode = tail; 
+                tail = newNode; 
                 newNode -> next = nullptr; 
             }
             count++; 
@@ -59,31 +64,25 @@ class LinkedList {
         }
 
         int deleteF () {
-            if (count == 0) return -1;  
-            Node* temp = head; 
-            int i = temp -> key; 
-            head = head -> next; 
-            delete temp; 
-            head -> prev = nullptr; 
-            if (head = nullptr) tail = nullptr; 
+            Node* temp = head;
+            int i = temp -> key;
+            if (count == 0) return -1;
+            if (temp -> next == nullptr) head = tail = nullptr;  
+            else { head = head -> next; head -> prev = nullptr; }
+            delete temp;
             count--; 
             return i; 
         }
 
         int deleteL () {
-            Node* temp = head; 
-            int i; 
-            if (count == 0) return -1; 
-            else {
-                while (temp -> next != nullptr) temp = temp -> next; 
-                i = temp -> key; 
-                Node* newLast = temp -> prev; 
-                newLast -> next = nullptr; 
-                newLast = tail; 
-                delete temp; 
-            }
+            Node* temp = tail;
+            int i = temp -> key;
+            if (count == 0) return -1;
+            if (temp -> prev == nullptr) head = tail = nullptr;  
+            else { tail = tail -> prev; tail -> next = nullptr; }
+            delete temp;
             count--; 
-            return i;
+            return i; 
         }
 
         void printAll () {
@@ -104,9 +103,9 @@ int main () {
 
     LL.insertF(32);
     LL.insertF(42); 
-    // LL.insertL(37);
-    // LL.insertL(27);
-    int temp = LL.deleteF();
+    LL.insertL(37);
+    LL.insertL(27);
+    int temp = LL.deleteL();
     LL.printAll(); 
 
     return 0; 
