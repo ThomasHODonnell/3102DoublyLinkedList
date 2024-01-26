@@ -90,9 +90,10 @@ class LinkedList {
             while (current != nullptr) {
                 cout << current -> key; 
                 if (current -> next != nullptr) cout << " ";
+                else cout << "\n";
+
                 current = current -> next; 
             }
-            cout << "\n";
             return; 
         }
 };
@@ -105,7 +106,7 @@ int main () {
     LL.insertF(42); 
     LL.insertL(37);
     LL.insertL(27);
-    int temp = LL.deleteL();
+    int temp = LL.deleteF();
     LL.printAll();
 
     return 0; 
