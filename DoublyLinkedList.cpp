@@ -106,7 +106,7 @@ int main () {
     LL.insertL(37);
     LL.insertL(27);
     int temp = LL.deleteL();
-    LL.printAll(); 
+    LL.printAll();
 
     return 0; 
 }
